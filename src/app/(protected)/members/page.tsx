@@ -1,0 +1,197 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { createClient } from '@/lib/supabase/client'
+import { useAuth } from '@/components/AuthProvider'
+import ProfileCard from '@/components/ProfileCard'
+import type { Profile } from '@/types/database'
+
+export default function MembersPage() {
+  const { user } = useAuth()
+  const supabase = createClient()
+  const [profiles, setProfiles] = useState<Profile[]>([])
+  const [userProfile, setUserProfile] = useState<Profile | null>(null)
+  const [connections, setConnections] = useState<string[]>([])
+  const [loading, setLoading] = useState(true)
+  const [meetLoading, setMeetLoading] = useState(false)
+
+  useEffect(() => {
+    if (user) {
+      loadProfiles()
+      loadUserProfile()
+      loadConnections()
+    }
+  }, [user])
+
+  const loadProfiles = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (error) throw error
+      setProfiles(data || [])
+    } catch (error) {
+      console.error('Error loading profiles:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const loadUserProfile = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user?.id)
+        .single()
+
+      if (error && error.code !== 'PGRST116') throw error
+      setUserProfile(data)
+    } catch (error) {
+      console.error('Error loading user profile:', error)
+    }
+  }
+
+  const loadConnections = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('connections')
+        .select('connection_id')
+        .eq('user_id', user?.id)
+
+      if (error) throw error
+      setConnections(data?.map(conn => conn.connection_id) || [])
+    } catch (error) {
+      console.error('Error loading connections:', error)
+    }
+  }
+
+  const handleMeetOptIn = async () => {
+    if (!user || meetLoading) return
+
+    setMeetLoading(true)
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ wants_meet: !userProfile?.wants_meet })
+        .eq('id', user.id)
+
+      if (error) throw error
+
+      setUserProfile(prev => prev ? { ...prev, wants_meet: !prev.wants_meet } : null)
+    } catch (error) {
+      console.error('Error updating meet preference:', error)
+      alert('Failed to update meet preference. Please try again.')
+    } finally {
+      setMeetLoading(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">Members</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+              <div className="animate-pulse">
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                <div className="h-3 bg-gray-200 rounded w-1/2 mb-4"></div>
+                <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  // Filter out profiles that don't have required fields completed
+  const completedProfiles = profiles.filter(profile => 
+    profile.display_name && profile.title && profile.superpower && profile.ask
+  )
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Members</h1>
+        
+        {userProfile && userProfile.display_name && (
+          <button
+            onClick={handleMeetOptIn}
+            disabled={meetLoading}
+            className={`px-6 py-2 rounded-md font-medium transition-colors ${
+              userProfile.wants_meet
+                ? 'bg-green-600 text-white hover:bg-green-700'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50`}
+          >
+            {meetLoading 
+              ? 'Updating...' 
+              : userProfile.wants_meet 
+                ? 'Opted in for Meet ✓' 
+                : 'Opt-in for this week\'s Meet'
+            }
+          </button>
+        )}
+      </div>
+
+      {!userProfile?.display_name && (
+        <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4 mb-6">
+          <div className="flex">
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-yellow-800">
+                Complete your profile first
+              </h3>
+              <div className="mt-2 text-sm text-yellow-700">
+                <p>
+                  Please complete your profile to appear in the members directory and access all features.
+                </p>
+              </div>
+              <div className="mt-4">
+                <div className="-mx-2 -my-1.5 flex">
+                  <a
+                    href="/profile/edit"
+                    className="bg-yellow-50 px-2 py-1.5 rounded-md text-sm font-medium text-yellow-800 hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellow-50 focus:ring-yellow-600"
+                  >
+                    Complete Profile
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {completedProfiles.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-gray-500">No members have completed their profiles yet.</p>
+          <p className="text-gray-500 mt-2">Be the first to complete yours!</p>
+        </div>
+      ) : (
+        <>
+          <p className="text-gray-600 mb-6">
+            {completedProfiles.length} member{completedProfiles.length !== 1 ? 's' : ''} in your Achievers Hub
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {completedProfiles.map((profile) => (
+              <ProfileCard
+                key={profile.id}
+                profile={profile}
+                isRemembered={connections.includes(profile.id)}
+                onConnectionSaved={() => {
+                  loadProfiles()
+                  loadConnections()
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
