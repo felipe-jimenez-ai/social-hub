@@ -244,7 +244,14 @@ export default function EditProfilePage() {
 
           <div>
             <label htmlFor="superpower" className="block text-sm font-medium text-gray-700">
-              Your Superpower *
+              <span className="flex items-center gap-2 mb-1">
+                <span><strong>Your Superpower *</strong></span>
+              </span>
+              <span className="block text-sm font-normal text-gray-600">
+                What is a key skill you are willing to share? What are you exceptional at and can help others with?
+                <br />
+                Be specific. E.g., "I'm a whiz with financial models in Excel" or "I can build an effective landing page."
+              </span>
             </label>
             <textarea
               id="superpower"
@@ -260,7 +267,14 @@ export default function EditProfilePage() {
 
           <div>
             <label htmlFor="ask" className="block text-sm font-medium text-gray-700">
-              Your Ask *
+              <span className="flex items-center gap-2 mb-1">
+                <span><strong>Your Kryptonite *</strong></span>
+              </span>
+              <span className="block text-sm font-normal text-gray-600">
+                What is a specific challenge you need help with right now? What do you urgently need assistance with?
+                <br />
+                E.g., "I need feedback on a presentation for investors" or "I'm looking for someone to practice my English with."
+              </span>
             </label>
             <textarea
               id="ask"

@@ -54,7 +54,7 @@ export default function SignupPage() {
   return (
     <form onSubmit={handleSignup} className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Join Achievers Hub</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Join The Hub</h2>
       </div>
 
       {error && (

@@ -11,8 +11,8 @@ export default function AuthLayout({
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-gray-900">Achievers Hub</h1>
-              <p className="text-gray-600 mt-2">Community Platform</p>
+              <h1 className="text-3xl font-bold text-gray-900">The Hub</h1>
+              <p className="text-gray-600 mt-2">Find the right person in the room, instantly.</p>
             </div>
             {children}
           </div>

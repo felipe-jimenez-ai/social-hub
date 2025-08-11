@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useDebounce } from '@/hooks/useDebounce'
 import { createClient } from '@/lib/supabase/client'
 import { useAuth } from '@/components/AuthProvider'
 import ProfileCard from '@/components/ProfileCard'
@@ -14,6 +15,8 @@ export default function MembersPage() {
   const [connections, setConnections] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
   const [meetLoading, setMeetLoading] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
+  const debouncedSearchTerm = useDebounce(searchTerm, 500) // 500ms delay
 
   useEffect(() => {
     if (user) {
@@ -138,6 +141,22 @@ export default function MembersPage() {
           </button>
         )}
       </div>
+      
+      {/* Search Bar */}
+      <div className="relative mb-6">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search by name, superpower, or kryptonite..."
+          className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500 sm:text-sm"
+        />
+      </div>
 
       {!userProfile?.display_name && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4 mb-6">
@@ -174,11 +193,23 @@ export default function MembersPage() {
       ) : (
         <>
           <p className="text-gray-600 mb-6">
-            {completedProfiles.length} member{completedProfiles.length !== 1 ? 's' : ''} in your Achievers Hub
+            {completedProfiles.length} member{completedProfiles.length !== 1 ? 's' : ''} in your Hub
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {completedProfiles.map((profile) => (
+            {completedProfiles
+              .filter((profile) => {
+                if (!debouncedSearchTerm.trim()) return true;
+                
+                const search = debouncedSearchTerm.toLowerCase();
+                return (
+                  (profile.display_name?.toLowerCase() || '').includes(search) ||
+                  (profile.title?.toLowerCase() || '').includes(search) ||
+                  (profile.superpower?.toLowerCase() || '').includes(search) ||
+                  (profile.ask?.toLowerCase() || '').includes(search)
+                );
+              })
+              .map((profile) => (
               <ProfileCard
                 key={profile.id}
                 profile={profile}
@@ -189,6 +220,21 @@ export default function MembersPage() {
                 }}
               />
             ))}
+            {completedProfiles.filter((profile) => {
+              if (!debouncedSearchTerm.trim()) return true;
+              
+              const search = debouncedSearchTerm.toLowerCase();
+              return (
+                (profile.display_name?.toLowerCase() || '').includes(search) ||
+                (profile.title?.toLowerCase() || '').includes(search) ||
+                (profile.superpower?.toLowerCase() || '').includes(search) ||
+                (profile.ask?.toLowerCase() || '').includes(search)
+              );
+            }).length === 0 && (
+              <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-12">
+                <p className="text-gray-500 text-center">No members found. Try searching for a different skill or name.</p>
+              </div>
+            )}
           </div>
         </>
       )}
