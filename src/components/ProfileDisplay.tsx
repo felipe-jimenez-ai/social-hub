@@ -96,7 +96,7 @@ export default function ProfileDisplay({ profile, showLinkedIn = true, children 
             {/* Superpower */}
             {profile.superpower && (
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Superpower:</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Superpower</h4>
                 <p className="text-sm text-gray-600 whitespace-normal break-words">{profile.superpower}</p>
               </div>
             )}
@@ -104,7 +104,7 @@ export default function ProfileDisplay({ profile, showLinkedIn = true, children 
             {/* Ask */}
             {profile.ask && (
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Looking for help with:</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Kryptonite</h4>
                 <p className="text-sm text-gray-600 whitespace-normal break-words">{profile.ask}</p>
               </div>
             )}
@@ -169,7 +169,7 @@ export default function ProfileDisplay({ profile, showLinkedIn = true, children 
       {/* Superpower */}
       {profile.superpower && (
         <div className="mb-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-1">Superpower:</h4>
+          <h4 className="text-sm font-medium text-gray-700 mb-1">Superpower</h4>
           <div className="relative">
             <p className="text-sm text-gray-600 line-clamp-3 overflow-hidden break-words">
               {profile.superpower}
@@ -184,7 +184,7 @@ export default function ProfileDisplay({ profile, showLinkedIn = true, children 
       {/* Ask */}
       {profile.ask && (
         <div className="mb-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-1">Looking for help with:</h4>
+          <h4 className="text-sm font-medium text-gray-700 mb-1">Kryptonite</h4>
           <div className="relative">
             <p className="text-sm text-gray-600 line-clamp-3 overflow-hidden break-words">
               {profile.ask}

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Achievers Hub",
+  title: "The Hub",
   description: "Build meaningful professional connections",
 };
 

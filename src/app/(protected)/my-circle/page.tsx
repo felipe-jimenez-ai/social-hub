@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useDebounce } from '@/hooks/useDebounce'
 import { createClient } from '@/lib/supabase/client'
 import { useAuth } from '@/components/AuthProvider'
 import ProfileDisplay from '@/components/ProfileDisplay'
@@ -16,6 +17,8 @@ export default function MyCirclePage() {
   const supabase = createClient()
   const [connections, setConnections] = useState<ConnectionWithProfile[]>([])
   const [loading, setLoading] = useState(true)
+  const [searchTerm, setSearchTerm] = useState('')
+  const debouncedSearchTerm = useDebounce(searchTerm, 500) // 500ms delay
 
   useEffect(() => {
     if (user) {
@@ -103,6 +106,22 @@ export default function MyCirclePage() {
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-6">My Circle</h1>
       
+      {/* Search Bar */}
+      <div className="relative mb-6">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search by name, superpower, or kryptonite..."
+          className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500 sm:text-sm"
+        />
+      </div>
+
       {connections.length === 0 ? (
         <div className="text-center py-12">
           <div className="text-gray-500 mb-4">
@@ -128,7 +147,21 @@ export default function MyCirclePage() {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {connections.map((connection) => (
+            {connections
+              .filter((connection) => {
+                if (!debouncedSearchTerm.trim()) return true;
+                
+                const search = debouncedSearchTerm.toLowerCase();
+                const profile = connection.profiles;
+                return (
+                  (profile.display_name?.toLowerCase() || '').includes(search) ||
+                  (profile.title?.toLowerCase() || '').includes(search) ||
+                  (profile.superpower?.toLowerCase() || '').includes(search) ||
+                  (profile.ask?.toLowerCase() || '').includes(search) ||
+                  (connection.notes?.toLowerCase() || '').includes(search)
+                );
+              })
+              .map((connection) => (
               <ConnectionCard
                 key={connection.id}
                 connection={connection}
@@ -136,6 +169,23 @@ export default function MyCirclePage() {
                 onUpdateNotes={handleUpdateNotes}
               />
             ))}
+            {connections.filter((connection) => {
+              if (!debouncedSearchTerm.trim()) return true;
+              
+              const search = debouncedSearchTerm.toLowerCase();
+              const profile = connection.profiles;
+              return (
+                (profile.display_name?.toLowerCase() || '').includes(search) ||
+                (profile.title?.toLowerCase() || '').includes(search) ||
+                (profile.superpower?.toLowerCase() || '').includes(search) ||
+                (profile.ask?.toLowerCase() || '').includes(search) ||
+                (connection.notes?.toLowerCase() || '').includes(search)
+              );
+            }).length === 0 && (
+              <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-12">
+                <p className="text-gray-500 text-center">No connections found. Try searching for a different skill or name.</p>
+              </div>
+            )}
           </div>
         </>
       )}
