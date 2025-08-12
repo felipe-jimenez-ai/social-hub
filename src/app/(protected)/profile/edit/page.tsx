@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useAuth } from '@/components/AuthProvider'
 import { useRouter } from 'next/navigation'
-import type { Profile } from '@/types/database'
+import SafeImage from '@/components/SafeImage'
 
 export default function EditProfilePage() {
   const { user } = useAuth()
@@ -25,13 +25,7 @@ export default function EditProfilePage() {
     profile_image: ''
   })
 
-  useEffect(() => {
-    if (user) {
-      loadProfile()
-    }
-  }, [user])
-
-  const loadProfile = async () => {
+  const loadProfile = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -59,7 +53,13 @@ export default function EditProfilePage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase, user?.id])
+
+  useEffect(() => {
+    if (user) {
+      loadProfile()
+    }
+  }, [user, loadProfile])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -141,9 +141,11 @@ export default function EditProfilePage() {
           <div className="flex flex-col sm:flex-row items-center sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
             <div className="flex-shrink-0">
               {formData.profile_image ? (
-                <img
+                <SafeImage
                   src={formData.profile_image}
                   alt="Profile preview"
+                  width={80}
+                  height={80}
                   className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-gray-200"
                 />
               ) : (
@@ -182,11 +184,11 @@ export default function EditProfilePage() {
                       <ol className="space-y-1 list-decimal list-inside text-gray-700 text-xs">
                         <li>Go to your LinkedIn profile page</li>
                         <li>Right-click on your profile photo</li>
-                        <li>Select <strong>"Copy image address"</strong> or <strong>"Copy image URL"</strong></li>
+                        <li>Select <strong>&quot;Copy image address&quot;</strong> or <strong>&quot;Copy image URL&quot;</strong></li>
                         <li>Paste the URL in the field above</li>
                       </ol>
                       <p className="mt-2 text-xs text-blue-600">
-                        <strong>Note:</strong> Make sure your LinkedIn profile is public or the photo won't be visible to others
+                        <strong>Note:</strong> Make sure your LinkedIn profile is public or the photo won&apos;t be visible to others
                       </p>
                     </div>
                   </details>
@@ -250,7 +252,7 @@ export default function EditProfilePage() {
               <span className="block text-sm font-normal text-gray-600">
                 What is a key skill you are willing to share? What are you exceptional at and can help others with?
                 <br />
-                Be specific. E.g., "I'm a whiz with financial models in Excel" or "I can build an effective landing page."
+                Be specific. E.g., &quot;I&apos;m a whiz with financial models in Excel&quot; or &quot;I can build an effective landing page.&quot;
               </span>
             </label>
             <textarea
@@ -273,7 +275,7 @@ export default function EditProfilePage() {
               <span className="block text-sm font-normal text-gray-600">
                 What is a specific challenge you need help with right now? What do you urgently need assistance with?
                 <br />
-                E.g., "I need feedback on a presentation for investors" or "I'm looking for someone to practice my English with."
+                E.g., &quot;I need feedback on a presentation for investors&quot; or &quot;I&apos;m looking for someone to practice my English with.&quot;
               </span>
             </label>
             <textarea
