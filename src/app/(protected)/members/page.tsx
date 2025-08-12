@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useDebounce } from '@/hooks/useDebounce'
 import { createClient } from '@/lib/supabase/client'
 import { useAuth } from '@/components/AuthProvider'
@@ -18,15 +18,7 @@ export default function MembersPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedSearchTerm = useDebounce(searchTerm, 500) // 500ms delay
 
-  useEffect(() => {
-    if (user) {
-      loadProfiles()
-      loadUserProfile()
-      loadConnections()
-    }
-  }, [user])
-
-  const loadProfiles = async () => {
+  const loadProfiles = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -40,9 +32,9 @@ export default function MembersPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase])
 
-  const loadUserProfile = async () => {
+  const loadUserProfile = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -55,9 +47,9 @@ export default function MembersPage() {
     } catch (error) {
       console.error('Error loading user profile:', error)
     }
-  }
+  }, [supabase, user?.id])
 
-  const loadConnections = async () => {
+  const loadConnections = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('connections')
@@ -69,7 +61,15 @@ export default function MembersPage() {
     } catch (error) {
       console.error('Error loading connections:', error)
     }
-  }
+  }, [supabase, user?.id])
+
+  useEffect(() => {
+    if (user) {
+      loadProfiles()
+      loadUserProfile()
+      loadConnections()
+    }
+  }, [user, loadProfiles, loadUserProfile, loadConnections])
 
   const handleMeetOptIn = async () => {
     if (!user || meetLoading) return
