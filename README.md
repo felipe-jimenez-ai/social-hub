@@ -1,4 +1,4 @@
-# 👥 Social Hub
+# 👥 The Hub
 
 ## Project Status: PRIVATE - Pre-Funding MVP
 
