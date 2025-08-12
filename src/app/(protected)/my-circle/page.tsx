@@ -20,12 +20,6 @@ export default function MyCirclePage() {
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedSearchTerm = useDebounce(searchTerm, 500) // 500ms delay
 
-  useEffect(() => {
-    if (user) {
-      loadConnections()
-    }
-  }, [user, loadConnections])
-
   const loadConnections = useCallback(async () => {
     try {
       const { data, error } = await supabase
@@ -45,6 +39,12 @@ export default function MyCirclePage() {
       setLoading(false)
     }
   }, [supabase, user?.id])
+
+  useEffect(() => {
+    if (user) {
+      loadConnections()
+    }
+  }, [user, loadConnections])
 
   const handleDeleteConnection = async (connectionId: string) => {
     try {
@@ -131,7 +131,7 @@ export default function MyCirclePage() {
           </div>
           <p className="text-gray-500 text-lg mb-2">Your circle is empty</p>
           <p className="text-gray-500 mb-6">
-            Start building your circle by visiting the Members page and clicking &quot;Remember&quot; on profiles you want to keep track of.
+            Start building your circle by visiting the Members page and clicking "Remember" on profiles you want to keep track of.
           </p>
           <Link
             href="/members"
