@@ -1,4 +1,20 @@
-# 👥 Social Hub
+<h1 align="center">👥 The Hub</h1>
+
+<p align="center">
+  <strong>A surgical tool to solve the "who's in the room" problem at live events.</strong>
+</p>
+
+<p align="center">
+  <a href="https://nextjs.org/">
+    <img src="https://img.shields.io/badge/Next.js-14+-black.svg?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+  </a>
+  <a href="https://supabase.io/">
+    <img src="https://img.shields.io/badge/Supabase-green.svg?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
+  </a>
+  <a href="https://tailwindcss.com/">
+    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  </a>
+</p>
 
 ## Project Status: PRIVATE - Pre-Funding MVP
 
@@ -6,13 +22,13 @@ This is a pre-seed, pre-revenue project. The current objective is to build a min
 
 ---
 
-## 1. The Problem (The "Why")
+## The Problem (The "Why")
 
-Professional events, workshops, and educational cohorts (like the "Achievers Lab JAM") consistently fail in the first five minutes. They gather high-value individuals in a room and provide them with zero effective tools to answer three simple questions:
+Professional events, workshops, and educational cohorts consistently fail in the first five minutes. They gather high-value individuals in a room and provide them with zero effective tools to answer three simple questions:
 
-1.  Who is in this room?
-2.  Why should I talk to them?
-3.  How can I find the right person *now*?
+1.  **Who is in this room?**
+2.  **Why should I talk to them?**
+3.  **How can I find the right person *now*?**
 
 The result is chaos, wasted time, broken promises of "networking," and a low ROI for both participants and organizers. This tool solves this problem.
 
@@ -23,63 +39,67 @@ The result is chaos, wasted time, broken promises of "networking," and a low ROI
 
 It is a surgical tool designed to solve the information asymmetry of "Day 1."
 
-## 2. The Solution (The MVP Scope)
+## The Solution (The MVP Scope)
 
-The MVP is a simple, mobile-responsive web application designed to be used as the official "first step" of any cohort-based event. It must execute three functions perfectly. Anything outside of this scope is considered a post-pilot feature.
+The Hub is a simple, mobile-responsive web application designed to be the official "first step" of any cohort-based event. It executes three functions perfectly.
 
-**Core MVP Features:**
+*   **⚡️ Effortless Profile Setup:** Users create a minimal profile with their name, photo, title, a "Superpower" (what they offer), and a "Kryptonite" (what they need help with).
+*   **🔍 Instant, Filterable Directory:** A clean, fast, and scannable grid of all participant profiles.
+*   **🔑 Universal Keyword Search:** A single, prominent search bar that queries all profile fields to instantly find the right person.
 
-1.  **Effortless Profile Setup:** Users are prompted to set up a minimal profile containing:
-    *   `Name` (String)
-    *   `Photo` (Image Upload)
-    *   `Role / Title` (String, e.g., "Software Engineer @ Acme Corp")
-    *   `My Superpower` (Text, e.g., "Expert in financial modeling")
-    *   `My Kryptonite` (Text, e.g., "Need help with user-centric design")
+## Tech Stack
 
-2.  **A Clean, Filterable Directory:** A simple grid or list view of all participant profiles. This directory must be clean, fast, and easy to scan.
+*   **Framework:** [Next.js](https://nextjs.org/)
+*   **Backend & DB:** [Supabase](https://supabase.io/)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **Language:** [TypeScript](https://www.typescriptlang.org/)
 
-3.  **Instant Keyword Search:** A single, prominent search bar that queries all fields in the profile database. Results must be instantaneous.
+## Getting Started
 
-## 3. Roadmap (Post-Paid-Pilot ONLY)
+### 1. Prerequisites
+*   Node.js (v18+)
+*   A Supabase project.
 
-The following features will only be considered after a successful, **paid** pilot project is completed and the client has validated the core solution. **This is not the current scope.**
+### 2. Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/the-hub.git
+    cd the-hub
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Set up environment variables:**
+    Create a file named `.env.local` in the root of your project and add your Supabase credentials. You can find these in your Supabase project's "API" settings.
+
+    ```bash
+    NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+    ```
+    See `.env.example` for a template.
+
+4.  **Set up the database:**
+    Run the SQL statements in `database-schema.sql` in your Supabase SQL Editor to create the necessary tables and policies.
+
+5.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## Roadmap (Post-Paid-Pilot ONLY)
+
+The following features will only be considered after a successful, **paid** pilot project is completed.
 
 *   **V2 - Admin Dashboard:** Analytics for the organizer showing connection metrics.
 *   **V3 - AI Recommendations:** Basic matching between "Superpower" and "Kryptonite" fields.
 *   **V4 - Persistence:** Allowing users to access their "dossier" from past events.
 
----
+## License
 
-This is your constitution. Anything not on this list is a distraction. If you get a "great idea" for a new feature, you thank yourself for your creativity and then you ignore it.
-
-Now go build the brick.
-
-
-## Technical Stack (The "How")
-
-This is a [Next.js](https://nextjs.org) app.
-
-Run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-Start editing by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
-
-## Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Learn Next.js](https://nextjs.org/learn)
-
-## Deploy
-
-You can deploy using platforms like [Vercel](https://vercel.com/). See the Next.js docs for details.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
