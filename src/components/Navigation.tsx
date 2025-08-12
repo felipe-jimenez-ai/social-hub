@@ -80,12 +80,20 @@ export default function Navigation() {
               </Link>
             ))}
             {user && (
-              <Link
-                href="/profile/edit"
-                className="text-xs text-gray-600 hover:text-gray-900 px-2 py-1"
-              >
-                Profile
-              </Link>
+              <>
+                <Link
+                  href="/profile/edit"
+                  className="text-xs text-gray-600 hover:text-gray-900 px-2 py-1"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="text-xs text-gray-600 hover:text-gray-900 px-2 py-1"
+                >
+                  Sign out
+                </button>
+              </>
             )}
           </div>
         </div>
