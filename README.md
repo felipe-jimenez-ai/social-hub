@@ -1,20 +1,4 @@
-<h1 align="center">👥 The Hub</h1>
-
-<p align="center">
-  <strong>A surgical tool to solve the "who's in the room" problem at live events.</strong>
-</p>
-
-<p align="center">
-  <a href="https://nextjs.org/">
-    <img src="https://img.shields.io/badge/Next.js-14+-black.svg?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
-  </a>
-  <a href="https://supabase.io/">
-    <img src="https://img.shields.io/badge/Supabase-green.svg?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
-  </a>
-  <a href="https://tailwindcss.com/">
-    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  </a>
-</p>
+# 👥 Social Hub
 
 ## Project Status: PRIVATE - Pre-Funding MVP
 
