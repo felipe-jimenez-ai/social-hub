@@ -31,6 +31,8 @@ The Hub is a simple, mobile-responsive web application designed to be the offici
 *   **🔍 Instant, Filterable Directory:** A clean, fast, and scannable grid of all participant profiles.
 *   **🔑 Universal Keyword Search:** A single, prominent search bar that queries all profile fields to instantly find the right person.
 
+https://github.com/user-attachments/assets/106da846-2694-4c04-a36e-01b483d4f2c3
+
 ## Tech Stack
 
 *   **Framework:** [Next.js](https://nextjs.org/)
