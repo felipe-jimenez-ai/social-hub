@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 <h1 align="center">👥 The Hub</h1>
 
 <p align="center">
   <strong>A surgical tool to solve the "who's in the room" problem at live events.
 </p>
+=======
+# 👥 The Hub
+>>>>>>> b5a6d77d323bc546c1ce975790410dd078a50479
 
 ## Project Status: PRIVATE - Pre-Funding MVP
 
@@ -34,6 +38,8 @@ The Hub is a simple, mobile-responsive web application designed to be the offici
 *   **⚡️ Effortless Profile Setup:** Users create a minimal profile with their name, photo, title, a "Superpower" (what they offer), and a "Kryptonite" (what they need help with).
 *   **🔍 Instant, Filterable Directory:** A clean, fast, and scannable grid of all participant profiles.
 *   **🔑 Universal Keyword Search:** A single, prominent search bar that queries all profile fields to instantly find the right person.
+
+https://github.com/user-attachments/assets/09034405-b212-4ad0-9c3a-01485d0e9ab8
 
 ## Tech Stack
 
