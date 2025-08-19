@@ -1,4 +1,8 @@
-# 👥 Social Hub
+<h1 align="center">👥 The Hub</h1>
+
+<p align="center">
+  <strong>A surgical tool to solve the "who's in the room" problem at live events.
+</p>
 
 ## Project Status: PRIVATE - Pre-Funding MVP
 
