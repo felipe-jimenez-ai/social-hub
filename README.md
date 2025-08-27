@@ -161,7 +161,7 @@ The application is currently configured to use Supabase for authentication and d
 
 ## Current Deployment Status
 
-The frontend application is currently deployed and accessible at: **https://the-hub-frontend.vercel.app/**
+The frontend application is currently deployed and accessible at: **https://the-hub.vercel.app/**
 
 ## Deployment to Vercel (Frontend Only)
 
