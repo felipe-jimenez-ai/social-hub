@@ -128,15 +128,15 @@ cd the-hub
 
 ### 3. Environment Variables
 
-The project is configured to use Supabase for authentication and database. The environment variables are already set up in `frontend/.env.local`:
+The project is configured to use Supabase for authentication and database. The environment variables are set up in `frontend/.env.local`:
 
 ```bash
-NEXT_PUBLIC_SUPABASE_URL=https://ngaqitxsryhsjlrgogpa.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 ```
 
-These variables are already configured and ready to use.
+**⚠️ SECURITY WARNING:** Never commit your actual API keys to the repository. The `.env.local` file is already in `.gitignore` to prevent this.
 
 ### 4. Install Frontend Dependencies
 
