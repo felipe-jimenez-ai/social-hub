@@ -37,50 +37,137 @@ The Hub is a simple, mobile-responsive web application designed to be the offici
 
 https://github.com/user-attachments/assets/09034405-b212-4ad0-9c3a-01485d0e9ab8
 
+## Project Structure
+
+The project is organized as a modular monolith within a monorepo, separating frontend and backend concerns into dedicated directories for clarity and maintainability.
+
+```
+the-hub/
+├── frontend/             # All Next.js frontend code and configuration
+│   ├── .next/            # Next.js build output
+│   ├── node_modules/     # Frontend dependencies
+│   ├── public/           # Frontend public assets
+│   ├── src/              # Next.js application source
+│   ├── .eslintrc.json    # Frontend ESLint configuration
+│   ├── next-env.d.ts     # Next.js environment types
+│   ├── next.config.mjs   # Next.js configuration
+│   ├── package.json      # Frontend dependencies and scripts
+│   ├── package-lock.json # Frontend dependency lock file
+│   ├── postcss.config.mjs # PostCSS configuration for frontend
+│   └── tsconfig.json     # Frontend TypeScript configuration
+│
+├── backend/              # All Python FastAPI backend code and configuration
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── src/
+│       ├── auth/         # Authentication and authorization module
+│       │   ├── api/
+│       │   ├── models/
+│       │   ├── services/
+│       │   └── utils/
+│       ├── connections/  # User connections management module
+│       │   ├── api/
+│       │   ├── models/
+│       │   ├── services/
+│       │   └── utils/
+│       ├── main.py       # Main FastAPI application entry point
+│       ├── profiles/     # User profiles management module
+│       │   ├── api/
+│       │   ├── models/
+│       │   ├── services/
+│       │   └── utils/
+│       ├── search/       # Search functionality module
+│       │   ├── api/
+│       │   ├── models/
+│       │   ├── services/
+│       │   └── utils/
+│       └── users/        # User management module
+│           ├── api/
+│           ├── models/
+│           ├── services/
+│           └── utils/
+│
+├── .gitignore            # Monorepo-level ignore rules
+├── docker-compose.yml    # Defines both frontend and backend services
+├── database-schema.sql   # Database schema (for initial setup)
+├── README.md             # Project README
+└── .env.local            # Environment variables (sensitive data)
+```
+
 ## Tech Stack
 
-*   **Framework:** [Next.js](https://nextjs.org/)
-*   **Backend & DB:** [Supabase](https://supabase.io/)
-*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-*   **Language:** [TypeScript](https://www.typescriptlang.org/)
+This project utilizes a modern and robust technology stack for both frontend and backend:
+
+*   **Frontend:**
+    *   **Framework:** [Next.js](https://nextjs.org/)
+    *   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+    *   **Language:** [TypeScript](https://www.typescriptlang.org/)
+*   **Backend:**
+    *   **Authentication & Database:** [Supabase](https://supabase.com/) (PostgreSQL + Auth)
+    *   **Language:** [Python](https://www.python.org/)
+    *   **API Framework:** [FastAPI](https://fastapi.tiangolo.com/)
+    *   **Data Layer:** [SQLModel](https://sqlmodel.tiangolo.com/) (Pydantic + SQLAlchemy)
+    *   **Database Migrations:** [Alembic](https://alembic.sqlalchemy.org/)
+    *   **Containerization:** [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 
 ## Getting Started
 
+Follow these steps to set up and run The Hub application locally.
+
 ### 1. Prerequisites
-*   Node.js (v18+)
-*   A Supabase project.
 
-### 2. Installation
+*   Node.js (v18+) - for frontend development (can be managed by nvm or similar)
+*   [Docker Desktop](https://www.docker.com/products/docker-desktop) (optional - for running the backend locally)
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/the-hub.git
-    cd the-hub
-    ```
+### 2. Clone the Repository
 
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
+```bash
+git clone https://github.com/felipe-jimenez-ai/the-hub.git
+cd the-hub
+```
 
-3.  **Set up environment variables:**
-    Create a file named `.env.local` in the root of your project and add your Supabase credentials. You can find these in your Supabase project's "API" settings.
+### 3. Environment Variables
 
-    ```bash
-    NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
-    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-    ```
-    See `.env.example` for a template.
+The project is configured to use Supabase for authentication and database. The environment variables are set up in `frontend/.env.local`:
 
-4.  **Set up the database:**
-    Run the SQL statements in `database-schema.sql` in your Supabase SQL Editor to create the necessary tables and policies.
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+```
 
-5.  **Run the development server:**
-    ```bash
-    npm run dev
-    ```
+**⚠️ SECURITY WARNING:** Never commit your actual API keys to the repository. The `.env.local` file is already in `.gitignore` to prevent this.
+
+### 4. Install Frontend Dependencies
+
+Navigate into the `frontend/` directory and install its dependencies:
+
+```bash
+cd frontend
+npm install
+```
+
+### 5. Run the Frontend Application
+
+Start the Next.js development server:
+
+```bash
+npm run dev
+```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+The application is currently configured to use Supabase for authentication and data storage, so no additional backend setup is required for the frontend to function.
+
+## Current Deployment Status
+
+The frontend application is currently deployed and accessible at: **https://the-hub-frontend.vercel.app/**
+
+## Deployment to Vercel (Frontend Only)
+
+For Vercel deployment, remember to configure the **Root Directory** setting in your Vercel project dashboard to `frontend/`. This tells Vercel where to find your Next.js application.
+
+The project is already configured for Vercel deployment with the correct build settings and environment variables.
 
 ## Roadmap (Post-Paid-Pilot ONLY)
 
