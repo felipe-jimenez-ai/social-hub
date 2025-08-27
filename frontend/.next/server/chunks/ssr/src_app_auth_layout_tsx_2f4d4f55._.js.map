@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/USUARIO/CascadeProjects/clan/src/app/auth/layout.tsx"],"sourcesContent":["export default function AuthLayout({\r\n  children,\r\n}: {\r\n  children: React.ReactNode\r\n}) {\r\n  return (\r\n    <div className=\"min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8\">\r\n      <div className=\"sm:mx-auto sm:w-full sm:max-w-md\">\r\n        <div className=\"bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10\">\r\n          <div className=\"text-center mb-8\">\r\n            <h1 className=\"text-3xl font-bold text-gray-900\">Clan</h1>\r\n            <p className=\"text-gray-600 mt-2\">Community Platform</p>\r\n          </div>\r\n          {children}\r\n        </div>\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n"],"names":[],"mappings":";;;;;AAAe,SAAS,WAAW,EACjC,QAAQ,EAGT;IACC,qBACE,8OAAC;QAAI,WAAU;kBACb,cAAA,8OAAC;YAAI,WAAU;sBACb,cAAA,8OAAC;gBAAI,WAAU;;kCACb,8OAAC;wBAAI,WAAU;;0CACb,8OAAC;gCAAG,WAAU;0CAAmC;;;;;;0CACjD,8OAAC;gCAAE,WAAU;0CAAqB;;;;;;;;;;;;oBAEnC;;;;;;;;;;;;;;;;;AAKX","debugId":null}}]
-}

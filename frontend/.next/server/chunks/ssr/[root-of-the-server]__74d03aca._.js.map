@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/USUARIO/CascadeProjects/clan/src/app/%28protected%29/my-circle/page.tsx"],"sourcesContent":["export default function MyCirclePage() {\r\n  return (\r\n    <div>\r\n      <h1 className=\"text-2xl font-bold text-gray-900 mb-6\">My Circle</h1>\r\n      <p className=\"text-gray-600\">\r\n        Your saved connections will appear here. Start building your circle by visiting the Members page and clicking \"Remember\" on profiles you want to keep track of.\r\n      </p>\r\n    </div>\r\n  )\r\n}\r\n"],"names":[],"mappings":";;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;;0BACC,8OAAC;gBAAG,WAAU;0BAAwC;;;;;;0BACtD,8OAAC;gBAAE,WAAU;0BAAgB;;;;;;;;;;;;AAKnC","debugId":null}}]
-}
