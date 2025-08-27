@@ -103,9 +103,9 @@ This project utilizes a modern and robust technology stack for both frontend and
     *   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
     *   **Language:** [TypeScript](https://www.typescriptlang.org/)
 *   **Backend:**
+    *   **Authentication & Database:** [Supabase](https://supabase.com/) (PostgreSQL + Auth)
     *   **Language:** [Python](https://www.python.org/)
     *   **API Framework:** [FastAPI](https://fastapi.tiangolo.com/)
-    *   **Database:** [PostgreSQL](https://www.postgresql.org/)
     *   **Data Layer:** [SQLModel](https://sqlmodel.tiangolo.com/) (Pydantic + SQLAlchemy)
     *   **Database Migrations:** [Alembic](https://alembic.sqlalchemy.org/)
     *   **Containerization:** [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
@@ -116,70 +116,58 @@ Follow these steps to set up and run The Hub application locally.
 
 ### 1. Prerequisites
 
-*   [Docker Desktop](https://www.docker.com/products/docker-desktop) (includes Docker Compose)
 *   Node.js (v18+) - for frontend development (can be managed by nvm or similar)
+*   [Docker Desktop](https://www.docker.com/products/docker-desktop) (optional - for running the backend locally)
 
 ### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/the-hub.git
+git clone https://github.com/felipe-jimenez-ai/the-hub.git
 cd the-hub
 ```
 
 ### 3. Environment Variables
 
-Create a file named `.env.local` in the **root** of your project and add your environment variables.
-For the backend, you'll need the `DATABASE_URL` (as defined in `docker-compose.yml` for local development):
-
-```
-DATABASE_URL=postgresql://user:password@db:5432/the_hub_db
-```
-
-### 4. Database Setup
-
-The `docker-compose.yml` file will automatically set up a PostgreSQL database. You will use Alembic for migrations (future step). For initial setup, you might still refer to `database-schema.sql` if manual schema creation is needed before migrations are fully integrated.
-
-### 5. Run the Application
-
-#### 5.1. Start Backend and Database (with Docker Compose)
-
-Navigate to the root of your project (`the-hub/`) and run:
+The project is configured to use Supabase for authentication and database. The environment variables are already set up in `frontend/.env.local`:
 
 ```bash
-docker-compose up --build -d
+NEXT_PUBLIC_SUPABASE_URL=https://ngaqitxsryhsjlrgogpa.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
-This command will:
-*   Build the backend Docker image.
-*   Start the PostgreSQL database service.
-*   Start the FastAPI backend service.
-The `-d` flag runs the services in detached mode (in the background).
 
-You can verify the backend is running by navigating to `http://localhost:8000` in your browser, or `http://localhost:8000/docs` for FastAPI's interactive API documentation.
+These variables are already configured and ready to use.
 
-#### 5.2. Install Frontend Dependencies
+### 4. Install Frontend Dependencies
 
 Navigate into the `frontend/` directory and install its dependencies:
 
 ```bash
 cd frontend
 npm install
-cd .. # Go back to the root if you plan to run docker-compose
 ```
 
-#### 5.3. Run Frontend Development Server
+### 5. Run the Frontend Application
 
-Navigate into the `frontend/` directory and start the Next.js development server:
+Start the Next.js development server:
 
 ```bash
-cd frontend
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the frontend application.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+The application is currently configured to use Supabase for authentication and data storage, so no additional backend setup is required for the frontend to function.
+
+## Current Deployment Status
+
+The frontend application is currently deployed and accessible at: **https://the-hub-frontend.vercel.app/**
 
 ## Deployment to Vercel (Frontend Only)
 
 For Vercel deployment, remember to configure the **Root Directory** setting in your Vercel project dashboard to `frontend/`. This tells Vercel where to find your Next.js application.
+
+The project is already configured for Vercel deployment with the correct build settings and environment variables.
 
 ## Roadmap (Post-Paid-Pilot ONLY)
 
