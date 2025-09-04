@@ -4,12 +4,6 @@
   <strong>From strangers to structured connections — networking that works.
 </p>
 
-## Project Status: PRIVATE - Pre-Funding MVP
-
-This is a pre-seed, pre-revenue project. The current objective is to build a minimal, high-quality MVP to secure a paid pilot project with the first anchor client. The focus is 100% on solving the core problem with zero feature creep.
-
----
-
 ## The Problem (The "Why")
 
 Professional events, workshops, and educational cohorts consistently fail in the first five minutes. They gather high-value individuals in a room and provide them with zero effective tools to answer three simple questions:
@@ -161,7 +155,7 @@ The application is currently configured to use Supabase for authentication and d
 
 ## Current Deployment Status
 
-The frontend application is currently deployed and accessible at: **https://the-hub.vercel.app/**
+The frontend application is currently deployed and accessible at: **https://achievers-az.vercel.app/**
 
 ## Deployment to Vercel (Frontend Only)
 
