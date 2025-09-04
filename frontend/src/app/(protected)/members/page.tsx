@@ -118,8 +118,8 @@ function MembersPage() { // <--- NO 'export' keyword here
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Members</h1>
+      <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between mb-6">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4 sm:mb-0">Members</h1>
         
         {userProfile && userProfile.display_name && (
           <button
