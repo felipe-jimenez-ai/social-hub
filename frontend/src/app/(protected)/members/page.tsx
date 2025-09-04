@@ -8,7 +8,7 @@ import ProfileCard from '@/components/ProfileCard'
 import withAuth from '@/components/withAuth'
 import type { Profile } from '@/types/database'
 
-export function MembersPage() {
+function MembersPage() {
   const { user } = useAuth()
   const supabase = createClient()
   const [profiles, setProfiles] = useState<Profile[]>([])
