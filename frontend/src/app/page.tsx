@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import Footer from '@/components/Footer'
+import Image from 'next/image' // Import the Image component
 
 export default function Home() {
   const { user, loading } = useAuth()
@@ -36,6 +37,14 @@ export default function Home() {
       <div className="flex-1 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <div className="text-center">
+            <div className="flex justify-center mb-0"> {/* Added a div for centering the image */}
+              <Image
+                src="/logo.png"
+                alt="Achievers Hub Logo"
+                width={200}
+                height={200}
+              />
+            </div>
             <h1 className="text-4xl font-bold text-gray-900 mb-0">Achievers Hub</h1>
             <p className="text-2xl font-light text-gray-900 mb-4">powered by AZ Tech</p>
             <p className="text-xl text-gray-600 mb-8">Find the right person in the room, instantly.</p>

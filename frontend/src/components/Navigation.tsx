@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAuth } from './AuthProvider'
+import Image from 'next/image' // Import Image component
 
 export default function Navigation() {
   const pathname = usePathname()
@@ -23,7 +24,13 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/members" className="flex flex-col sm:flex-row items-center font-bold text-gray-900">
+            <Link href="/" className="flex items-center space-x-1 font-bold text-gray-900">
+              <Image
+                src="/logo.png"
+                alt="Achievers Hub Logo"
+                width={40}
+                height={40}
+              />
               <span className="text-base sm:text-xl">Achievers Hub</span>
               <span className="sm:ml-1 font-light text-xs sm:text-base">powered by AZ Tech</span>
             </Link>
