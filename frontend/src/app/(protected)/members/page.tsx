@@ -5,9 +5,10 @@ import { useDebounce } from '@/hooks/useDebounce'
 import { createClient } from '@/lib/supabase/client'
 import { useAuth } from '@/components/AuthProvider'
 import ProfileCard from '@/components/ProfileCard'
+import withAuth from '@/components/withAuth'
 import type { Profile } from '@/types/database'
 
-export default function MembersPage() {
+export function MembersPage() {
   const { user } = useAuth()
   const supabase = createClient()
   const [profiles, setProfiles] = useState<Profile[]>([])
@@ -64,12 +65,10 @@ export default function MembersPage() {
   }, [supabase, user?.id])
 
   useEffect(() => {
-    if (user) {
-      loadProfiles()
-      loadUserProfile()
-      loadConnections()
-    }
-  }, [user, loadProfiles, loadUserProfile, loadConnections])
+    loadProfiles()
+    loadUserProfile()
+    loadConnections()
+  }, [loadProfiles, loadUserProfile, loadConnections])
 
   const handleMeetOptIn = async () => {
     if (!user || meetLoading) return
@@ -193,7 +192,7 @@ export default function MembersPage() {
       ) : (
         <>
           <p className="text-gray-600 mb-6">
-            {completedProfiles.length} member{completedProfiles.length !== 1 ? 's' : ''} in your Hub
+            {completedProfiles.length} member{completedProfiles.length !== 1 ? 's' : ''}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -241,3 +240,5 @@ export default function MembersPage() {
     </div>
   )
 }
+
+export default withAuth(MembersPage);

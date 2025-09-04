@@ -23,8 +23,9 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/members" className="text-xl font-bold text-gray-900">
-              The Hub
+            <Link href="/members" className="flex flex-col sm:flex-row items-center font-bold text-gray-900">
+              <span className="text-base sm:text-xl">Achievers Hub</span>
+              <span className="sm:ml-1 font-light text-xs sm:text-base">powered by AZ Tech</span>
             </Link>
           </div>
 

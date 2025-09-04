@@ -21,7 +21,7 @@ if not supabase_url or not supabase_service_key:
 supabase_client = create_client(supabase_url, supabase_service_key)
 
 # File path (adjust as necessary for your environment)
-excel_file_path = "../backend/data/data-achievers-20250812.xlsx"
+excel_file_path = "backend/data/data-achievers-20250812.xlsx"
 
 def create_auth_users():
     created_users_count = 0

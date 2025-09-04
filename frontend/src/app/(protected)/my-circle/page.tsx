@@ -143,7 +143,11 @@ export default function MyCirclePage() {
       ) : (
         <>
           <p className="text-gray-600 mb-6">
-            You have {connections.length} connection{connections.length !== 1 ? 's' : ''} in your circle
+            You have {connections.length} connection{connections.length !== 1 ? 's' : ''} in your
+            <div className="flex flex-col md:flex-row md:items-center">
+              <span className="font-bold text-lg md:text-xl"> circle Achievers Hub</span>
+              <span className="font-light text-sm md:text-xl md:ml-1"> powered by AZ Tech</span>
+            </div>
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -45,6 +45,3 @@ next-env.d.ts
 
 # Data files
 backend/data/
-
-# Exclude data files
-backend/data/data-achievers-20250812.xlsx

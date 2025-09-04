@@ -96,7 +96,7 @@ except Exception as user_fetch_error:
     exit(1)
 
 # File path (adjust as necessary for your environment)
-excel_file_path = "../backend/data/data-achievers-20250812.xlsx"
+excel_file_path = "backend/data/data-achievers-20250812.xlsx"
 
 def run_etl():
     try:
