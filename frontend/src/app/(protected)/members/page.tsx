@@ -5,10 +5,10 @@ import { useDebounce } from '@/hooks/useDebounce'
 import { createClient } from '@/lib/supabase/client'
 import { useAuth } from '@/components/AuthProvider'
 import ProfileCard from '@/components/ProfileCard'
-import withAuth from '@/components/withAuth'
+import withAuth from '@/components/withAuth' // This line should be present
 import type { Profile } from '@/types/database'
 
-function MembersPage() {
+function MembersPage() { // <--- NO 'export' keyword here
   const { user } = useAuth()
   const supabase = createClient()
   const [profiles, setProfiles] = useState<Profile[]>([])
@@ -192,7 +192,11 @@ function MembersPage() {
       ) : (
         <>
           <p className="text-gray-600 mb-6">
-            {completedProfiles.length} member{completedProfiles.length !== 1 ? 's' : ''}
+            {completedProfiles.length} member{completedProfiles.length !== 1 ? 's' : ''} in your
+            <div className="flex flex-col md:flex-row md:items-center">
+              <span className="font-bold text-lg md:text-xl"> Achievers Hub</span>
+              <span className="font-light text-sm md:text-xl md:ml-1"> powered by AZ Tech</span>
+            </div>
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -241,4 +245,5 @@ function MembersPage() {
   )
 }
 
-export default withAuth(MembersPage);
+const WrappedMembersPage = withAuth(MembersPage); // <--- New line
+export default WrappedMembersPage; // <--- This should be the default export

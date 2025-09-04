@@ -27,6 +27,7 @@ export default function LoginPage() {
       setError(error.message)
       setLoading(false)
     } else {
+      sessionStorage.setItem('isAuthenticated', 'true'); // Set flag for HOC
       router.push('/members')
       router.refresh()
     }
